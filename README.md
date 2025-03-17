@@ -21,8 +21,9 @@ python train.py [-h] -wp [WANDB_PROJECT] -we [WANDB_ENTITY] [-e EPOCHS]
                 [-eps EPSILON] [-w_d WEIGHT_DECAY] [-w_i WEIGHT_INIT]
                 [-nhl NUM_LAYERS] [-sz HIDDEN_SIZE] [-a ACTIVATION]
 ```
-
-train.py - train and run sweep 
-Question 1.py - Fashion MNIST Dataset Visualization<br>
-Question 2.py - Feedforward Neural Networks<br>
-Question 3.py - Backpropagation with optimizer functions<br>
+##Code organization
+**train.py** - train and run sweep <br>
+**Question 1.py** - Fashion MNIST Dataset Visualization<br>
+**Question 2.py** - Feedforward Neural Networks<br>
+**Question 3.py** - Backpropagation with optimizer functions<br>
+**sweep_config.py** - depicting configuration for sweep
