@@ -14,35 +14,53 @@ class FeedforwardNeuralNetwork():
             self.initialize_biases()
 
     def initialize_weights(self):
-        self.weights.append(np.random.randn(self.input_size, self.neurons))    
+        self.weights.append(np.random.randn(self.input_size, self.neurons))
+        for _ in range(self.hidden_layers - 1):
+            self.weights.append(np.random.randn(self.neurons, self.neurons))
+        self.weights.append(np.random.randn(self.neurons, self.output_size))
+
+        if self.weight_init == "xavier":
+            for i in range(len(self.weights)):
+                self.weights[i] = self.weights[i] * np.sqrt(1 / self.weights[i].shape[0])
         
-      #  self.layers = len(layer_sizes)
-       # self.weights = [np.random.randn(layer_sizes[i], layer_sizes[i + 1]) * 0.01 for i in range(len(layer_sizes) - 1)]
+        if(self.weight_init != "random" and self.weight_init != "xavier"):
+            raise Exception("Invalid weight initialization method")
     
     def initialize_biases(self):
+        for _ in range(self.hidden_layers):
+            self.biases.append(np.zeros(self.neurons))
+        self.biases.append(np.zeros(self.output_size))
+     
 
     def activation(self, x):
+        if self.activation_function == "tanh":
+            return np.tanh(x)
+        elif self.activation_function == "sigmoid":
+            return 1 / (1 + np.exp(-x))
+        elif self.activation_function == "relu":
+            return np.maximum(0, x)
+        else:
+            raise Exception("Invalid activation function")
 
     def output_activation(self, x):
-
-
-
-
-    def sigmoid(self, x):
-        return 1 / (1 + np.exp(-x))
-
-    def softmax(self, x):
-        exps = np.exp(x - np.max(x, axis=1, keepdims=True))
-        return exps / np.sum(exps, axis=1, keepdims=True)
-
+        if self.output_activation_function == "softmax":
+            max_x = np.max(x, axis=1)
+            max_x = max_x.reshape(max_x.shape[0], 1)
+            exp_x = np.exp(x - max_x)
+            softmax_mat = exp_x / np.sum(exp_x, axis=1).reshape(exp_x.shape[0], 1)
+            return softmax_mat
+        else:
+            raise Exception("Invalid output activation function")
+    
     def forward(self, X):
-        #X: Input data (batch_size, 
-        self.activations = [X]  # Storing activations for each layer
-        for i in range(len(self.weights) - 1):
-            X = self.sigmoid(np.dot(X, self.weights[i]) + self.biases[i])   #Using sigmoid function for all the hidden layers 
-            self.activations.append(X)
-        output = self.softmax(np.dot(X, self.weights[-1]) + self.biases[-1])       #Using softmax for the output layer
-        self.activations.append(output)
-        return output
-        # Output probabilities (batch_size, num_classes)
+        self.pre_activation, self.post_activation = [x], [x]
+
+        for i in range(self.hidden_layers):
+            self.pre_activation.append(np.matmul(self.post_activation[-1], self.weights[i]) + self.biases[i])
+            self.post_activation.append(self.activation(self.pre_activation[-1]))
+            
+        self.pre_activation.append(np.matmul(self.post_activation[-1], self.weights[-1]) + self.biases[-1])
+        self.post_activation.append(self.output_activation(self.pre_activation[-1]))
+        return self.post_activation[-1]
+
 
