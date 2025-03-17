@@ -13,6 +13,11 @@ class FeedforwardNeuralNetwork():
             self.initialize_weights()
             self.initialize_biases()
 
+    def initialize_biases(self):
+        for _ in range(self.hidden_layers):
+            self.biases.append(np.zeros(self.neurons))
+        self.biases.append(np.zeros(self.output_size))
+           
     def initialize_weights(self):
         self.weights.append(np.random.randn(self.input_size, self.neurons))
         for _ in range(self.hidden_layers - 1):
@@ -25,13 +30,7 @@ class FeedforwardNeuralNetwork():
         
         if(self.weight_init != "random" and self.weight_init != "xavier"):
             raise Exception("Invalid weight initialization method")
-    
-    def initialize_biases(self):
-        for _ in range(self.hidden_layers):
-            self.biases.append(np.zeros(self.neurons))
-        self.biases.append(np.zeros(self.output_size))
      
-
     def activation(self, x):
         if self.activation_function == "tanh":
             return np.tanh(x)
