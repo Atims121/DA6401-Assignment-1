@@ -114,7 +114,7 @@ class Optimizer():
             self.nn.weights[i] -= self.lr * (self.h_weights[i] + self.decay * self.nn.weights[i])
             self.nn.biases[i] -= self.lr * (self.h_biases[i] + self.decay * self.nn.biases[i])
 
-    def NAG(self, d_weights, d_biases):        
+    def NesterovAG(self, d_weights, d_biases):        
         for i in range(self.nn.hidden_layers + 1):
             self.h_weights[i] = self.momentum * self.h_weights[i] + d_weights[i]
             self.h_biases[i] = self.momentum * self.h_biases[i] + d_biases[i]
