@@ -69,16 +69,16 @@ def train_sweep():
     run.name = f"{parameters['activation']}_neurons={parameters['neurons']}_layers={parameters['hidden_layers']}_lr={parameters['learning_rate']}_batch={parameters['batch_size']}_opt={parameters['optimizer']}_mom={parameters['momentum']}_init={parameters['weight_init']}"
     x_train, y_train = load_data('train', dataset=parameters['dataset'])
     
-    nn = FFNeuralNetwork(input_size=parameters['input_size'], 
-                         hid_layers=parameters['hidden_layers'], 
+    nn = FeedforwardNeuralNetwork(input_size=parameters['input_size'], 
+                         hidden_layers=parameters['hidden_layers'], 
                          neurons=parameters['neurons'], 
                          output_size=parameters['output_size'], 
-                         act_func=parameters['activation'], 
-                         out_act_func=parameters['output_activation'],
+                         acti_func=parameters['activation'], 
+                         output_acti_func=parameters['output_activation'],
                          weight_init=parameters['weight_init'])
     bp = Backpropagation(nn=nn, 
                          loss=parameters['loss'],
-                         act_func=parameters['activation'])
+                         acti_func=parameters['activation'])
     opt = Optimizer(nn=nn,
                     bp=bp,
                     lr=parameters['learning_rate'],
