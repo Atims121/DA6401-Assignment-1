@@ -9,11 +9,15 @@ RMSProp - Root Mean Square Propagation<br>
 Adam - Adaptive Moment Estimation<br>
 Nadam - Nesterov Adaptive Moment Estimation<br>
 
-## Loss functions implemented:
-Cross Entropy<br>
-Mean Squared Error<br>
-
 ## How to run? <br>
 ``` bash
 python train.py -wp <wandb_project_name> -we <wandb_entity_name> 
+```
+To run the file with custom values,
+```bash
+python train.py [-h] -wp [WANDB_PROJECT] -we [WANDB_ENTITY] [-e EPOCHS]
+                [-b BATCH_SIZE] [-l LOSS] [-o OPTIMIZER] [-lr LEARNING_RATE]
+                [-m MOMENTUM] [-beta BETA] [-beta1 BETA1] [-beta2 BETA2]
+                [-eps EPSILON] [-w_d WEIGHT_DECAY] [-w_i WEIGHT_INIT]
+                [-nhl NUM_LAYERS] [-sz HIDDEN_SIZE] [-a ACTIVATION]
 ```
