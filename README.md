@@ -1,7 +1,7 @@
 # DA6401-Assignment-1
 Implementing a FeedForward Neural Network with Backpropagation from scratch alongwith few optimizers and loss functions on **Fashion-MNIST data**.
-## wandb report link: https://api.wandb.ai/links/ce21b121-iit-madras/debqegxo 
-## Github repo link: https://github.com/Atims121/DA6401-Assignment-1
+### wandb report link: https://api.wandb.ai/links/ce21b121-iit-madras/debqegxo <br>
+### Github repo link: https://github.com/Atims121/DA6401-Assignment-1 <br>
 
 ## Optimizers implemented: <br>
 **SGD** - Stochastic Gradient Descent <br>
